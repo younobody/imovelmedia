@@ -18,10 +18,14 @@ from db import query
 
 app = FastAPI(title="MediaImovel API", version="0.1.0")
 
-# Libera o frontend React (Vite) em dev.
+# Libera o frontend React (Vite) em dev e o GitHub Pages em produção.
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://localhost:3000"],
+    allow_origins=[
+        "http://localhost:5173",
+        "http://localhost:3000",
+        "https://younobody.github.io",
+    ],
     allow_methods=["*"],
     allow_headers=["*"],
 )
