@@ -102,7 +102,9 @@ def neighborhoods(
             ROUND(AVG(price_per_m2) FILTER (WHERE {PM2_SANE})::numeric, 2) AS mean_pm2,
             ROUND(MIN(price_per_m2) FILTER (WHERE {PM2_SANE})::numeric, 2) AS min_pm2,
             ROUND(MAX(price_per_m2) FILTER (WHERE {PM2_SANE})::numeric, 2) AS max_pm2,
-            ROUND(PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY area_m2)::numeric, 2) AS median_area
+            ROUND(PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY area_m2)::numeric, 2) AS median_area,
+            ROUND(AVG(latitude)::numeric, 6) AS avg_lat,
+            ROUND(AVG(longitude)::numeric, 6) AS avg_lng
         FROM properties
         WHERE {filters} AND neighborhood_normalized IS NOT NULL
         GROUP BY neighborhood_normalized
